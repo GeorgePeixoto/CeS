@@ -4,7 +4,9 @@ import { createApp } from '../src/app.js';
 export const silentLogger = { error() {}, warn() {}, info() {}, log() {} };
 
 export async function startTestApp(options = {}) {
-  const app = createApp({ dbPath: ':memory:', logger: silentLogger, ...options });
+  const app = createApp({
+    dbPath: ':memory:', sessionSecret: 'test-secret', logger: silentLogger, ...options,
+  });
   const server = await new Promise((resolve) => {
     const s = app.listen(0, '127.0.0.1', () => resolve(s));
   });

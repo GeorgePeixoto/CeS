@@ -83,8 +83,8 @@
 ### T7: API de login, logout e `me` + `requireAdmin` + limite de tentativas
 **Descrição:** sessão (`express-session`, cookie httpOnly/lax, 8h, regenerate no login), rotas, middleware e limite em memória (5 falhas em 15 min). O app não sobe sem `SESSION_SECRET`.
 **Aceite:**
-- [ ] Critérios 1–7 do SPEC-admin-auth cobertos por testes
-- [ ] `password_hash` nunca aparece numa resposta
+- [x] Critérios 1–7 do SPEC-admin-auth cobertos por testes
+- [x] `password_hash` nunca aparece numa resposta
 **Verificar:** `npm test -- tests/admin-auth`
 **Depende de:** T6
 **Arquivos:** `src/modules/admin-auth/service.js`, `src/modules/admin-auth/routes.js`, `src/modules/admin-auth/middleware.js`, `src/app.js`, `tests/admin-auth/auth.test.js`

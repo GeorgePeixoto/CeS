@@ -37,7 +37,7 @@ Protótipo web local (Node 26 + Express 5 + SQLite embutido + HTML/CSS/JS puro),
 
 ### Phase 2: `admin-auth`
 - [x] T6: Tabela `admin_users` + script `admin:create`
-- [ ] T7: API de login, logout e `me` + `requireAdmin` + limite de tentativas
+- [x] T7: API de login, logout e `me` + `requireAdmin` + limite de tentativas
 - [ ] T8: Página de login + proteção das páginas do admin
 - [ ] **Checkpoint 2**
 
