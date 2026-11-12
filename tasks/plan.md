@@ -33,10 +33,10 @@ Protótipo web local (Node 26 + Express 5 + SQLite embutido + HTML/CSS/JS puro),
 - [x] T3: Conexão SQLite, migrações e `transaction()`
 - [x] T4: `createApp`, middleware de erro, health e helper de teste
 - [x] T5: Base do front (CSS, `api.js`, layout)
-- [ ] **Checkpoint 1**
+- [x] **Checkpoint 1**
 
 ### Phase 2: `admin-auth`
-- [ ] T6: Tabela `admin_users` + script `admin:create`
+- [x] T6: Tabela `admin_users` + script `admin:create`
 - [ ] T7: API de login, logout e `me` + `requireAdmin` + limite de tentativas
 - [ ] T8: Página de login + proteção das páginas do admin
 - [ ] **Checkpoint 2**

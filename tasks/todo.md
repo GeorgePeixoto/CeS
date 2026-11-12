@@ -64,7 +64,7 @@
 ### Checkpoint 1 — Foundation
 - [x] `npm test` verde, `npm run check` ok
 - [x] `npm run db:migrate && npm run dev` sobe sem warnings inesperados
-- [ ] Revisão rápida com você
+- [x] Revisão rápida com você (commit b22cdc3)
 
 ---
 
@@ -73,8 +73,8 @@
 ### T6: Tabela `admin_users` + script `admin:create`
 **Descrição:** migração 002, repositório (findByEmail, create) e `scripts/create-admin.js` (lê a senha do terminal sem mostrar, mínimo de 8 caracteres, bcrypt custo 12).
 **Aceite:**
-- [ ] O script cria o admin e o hash começa com `$2`
-- [ ] E-mail duplicado (sem diferenciar maiúsculas) → erro claro
+- [x] O script cria o admin e o hash começa com `$2`
+- [x] E-mail duplicado (sem diferenciar maiúsculas) → erro claro
 **Verificar:** `npm test -- tests/admin-auth`; rodar `npm run admin:create`
 **Depende de:** Checkpoint 1
 **Arquivos:** `src/db/migrations/002_admin_users.sql`, `src/modules/admin-auth/repository.js`, `scripts/create-admin.js`, `tests/admin-auth/repository.test.js`
