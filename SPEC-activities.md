@@ -30,7 +30,7 @@ CREATE TABLE activities (
   start_date    TEXT NOT NULL,                        -- YYYY-MM-DD
   end_date      TEXT NOT NULL,                        -- >= start_date
   capacity      INTEGER NOT NULL CHECK (capacity > 0),
-  min_age       INTEGER,                              -- opcional (Open Question 3 do SPEC.md)
+  min_age       INTEGER,                              -- opcional; validado na pré-inscrição
   status        TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','published','cancelled')),
   created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))

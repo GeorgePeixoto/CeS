@@ -1,6 +1,6 @@
 # Spec: Sistema de Gestão de Oficinas — Núcleo de Arte, Educação e Cultura Marcus Jussier
 
-> Protótipo acadêmico. Juazeiro do Norte – CE. Status: **rascunho para aprovação** (2026-11-11).
+> Protótipo acadêmico. Juazeiro do Norte – CE. Status: **aprovado** (2026-11-11).
 > Prazo de entrega: **2026-11-13** (2 dias).
 
 ## Objetivo
@@ -55,8 +55,9 @@ npm run db:seed                  # dados de exemplo (categorias, instrutores, at
 npm run admin:create -- --email equipe@nucleo.local --name "Equipe"   # pede a senha no terminal
 npm run dev                      # node --watch --env-file-if-exists=.env src/server.js  → http://localhost:3000
 npm start                        # node --env-file-if-exists=.env src/server.js
-npm test                         # node --test "tests/**/*.test.js"
-npm run test:coverage            # node --test --experimental-test-coverage "tests/**/*.test.js"
+npm test                         # node --test (encontra todos os *.test.js)
+node --test tests/<module-id>/   # só um módulo
+npm run test:coverage            # node --test --experimental-test-coverage
 npm run check                    # node --check em todos os .js (não há linter na v1, para não adicionar dependências)
 ```
 
@@ -116,27 +117,27 @@ SPEC.md, SPEC-<module-id>.md, CLAUDE.md, BACKLOG.md
 
 ```js
 // src/modules/activities/routes.js
+// Express 5 repassa erros de handlers async ao middleware de erro: basta lançar.
 import { Router } from 'express';
-import { asyncHandler } from '../../lib/http.js';
 import { requireAdmin } from '../admin-auth/middleware.js';
 import { parseActivityInput } from './validation.js';
 
 export function activityRoutes({ service }) {
   const router = Router();
 
-  router.get('/api/activities', asyncHandler(async (req, res) => {
+  router.get('/api/activities', (req, res) => {
     const activities = service.listPublished({
       search: req.query.q,
       categoryId: req.query.category,
     });
     res.json({ data: activities });
-  }));
+  });
 
-  router.post('/api/admin/activities', requireAdmin, asyncHandler(async (req, res) => {
+  router.post('/api/admin/activities', requireAdmin, (req, res) => {
     const input = parseActivityInput(req.body); // lança ValidationError com { fields }
     const activity = service.create(input);
     res.status(201).json({ data: activity });
-  }));
+  });
 
   return router;
 }
@@ -190,8 +191,12 @@ export function activityRoutes({ service }) {
 6. O `/admin` e o `/api/admin/*` recusam acesso sem sessão (`401` na API, redirecionamento para o login nas páginas).
 7. `npm test` passa e `npm run db:migrate && npm run db:seed && npm start` deixa o sistema pronto para a demonstração.
 
+## Decisões registradas
+
+1. **Mudanças de escopo:** mudanças pedidas depois da validação com o Núcleo entram primeiro no `BACKLOG.md` e só depois de aprovadas vão para o spec. (2026-11-11)
+2. **Repositório:** git em `main`, remoto `GeorgePeixoto/CeS` no GitHub. O usuário faz os commits e pushes; o agente só faz commit quando pedido. (2026-11-11)
+3. **Idade mínima:** mantido o campo opcional `min_age` por atividade, validado na pré-inscrição (`BELOW_MIN_AGE`). (2026-11-11)
+
 ## Open Questions
 
-1. **Validação com o Núcleo:** o escopo pode mudar depois da apresentação. Mudanças entram no `BACKLOG.md` e só então no spec.
-2. **Repositório git:** `c:\CeS` ainda não é um repositório. Fazer `git init` antes de começar? (Requer sua aprovação.)
-3. **Idade mínima por atividade:** vale a pena ter (por exemplo, "a partir de 12 anos")? Proposta: campo opcional `min_age`, validado na inscrição.
+Nenhuma no momento.

@@ -11,7 +11,7 @@ Base técnica que os outros módulos usam: app Express testável, banco SQLite c
 - `src/db/connection.js`: abre o `DatabaseSync`, liga `PRAGMA foreign_keys = ON` e `journal_mode = WAL` (só em arquivo) e exporta `transaction(db, fn)` (`BEGIN IMMEDIATE` / `COMMIT` / `ROLLBACK`).
 - `src/db/migrate.js`: aplica `migrations/*.sql` em ordem alfabética, registra cada uma em `schema_migrations(name, applied_at)` e é idempotente.
 - `src/lib/errors.js`: `HttpError`, `ValidationError(fields)`, `NotFoundError`, `ConflictError(code)`, `UnauthorizedError`.
-- `src/lib/http.js`: `asyncHandler` e o middleware de erro. Erro inesperado → `500 { error: { code: 'INTERNAL_ERROR', message: 'Erro interno. Tente novamente.' } }`, sem stack na resposta; o detalhe vai para o log.
+- `src/lib/http.js`: cabeçalhos de segurança, 404 da API e o middleware de erro. (Não há `asyncHandler`: o Express 5 já repassa os erros de handlers async.) Erro inesperado → `500 { error: { code: 'INTERNAL_ERROR', message: 'Erro interno. Tente novamente.' } }`, sem stack na resposta; o detalhe vai para o log.
 - `src/lib/validation.js`: `requiredString(max)`, `optionalString(max)`, `positiveInt`, `isoDate`, `time` (`HH:MM`), `phoneBR` (normaliza para 10 ou 11 dígitos), `email`.
 - `express.json({ limit: '50kb' })`, estáticos de `public/`, 404 JSON em `/api/*`.
 - Cabeçalhos básicos: `X-Content-Type-Options: nosniff`, `Referrer-Policy: same-origin`, `X-Frame-Options: DENY`.
