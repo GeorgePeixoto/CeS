@@ -8,37 +8,7 @@ import { migrateDatabase } from '../src/db/migrate.js';
 import { createAdminUserRepository } from '../src/modules/admin-auth/repository.js';
 import { createAdminUser } from '../src/modules/admin-auth/service.js';
 import { HttpError } from '../src/lib/errors.js';
-
-function askHidden(question) {
-  return new Promise((resolve, reject) => {
-    const { stdin, stdout } = process;
-    stdout.write(question);
-    let value = '';
-    stdin.setRawMode(true);
-    stdin.resume();
-    stdin.setEncoding('utf8');
-    const onData = (char) => {
-      if (char === '\u0003') { // Ctrl+C
-        cleanup();
-        reject(new Error('Cancelado.'));
-      } else if (char === '\r' || char === '\n') {
-        cleanup();
-        stdout.write('\n');
-        resolve(value);
-      } else if (char === '\u0008' || char === '\u007f') { // backspace
-        value = value.slice(0, -1);
-      } else {
-        value += char;
-      }
-    };
-    function cleanup() {
-      stdin.setRawMode(false);
-      stdin.pause();
-      stdin.off('data', onData);
-    }
-    stdin.on('data', onData);
-  });
-}
+import { askHidden } from './lib/hidden-input.js';
 
 async function readFirstLine() {
   const rl = createInterface({ input: process.stdin });
@@ -48,8 +18,9 @@ async function readFirstLine() {
 
 async function readPassword() {
   if (!process.stdin.isTTY) return readFirstLine();
-  const password = await askHidden('Senha (mínimo 8 caracteres): ');
-  const confirmation = await askHidden('Confirme a senha: ');
+  // One raw-mode session for both prompts, so a trailing "\n" from Enter can't leak
+  // into the confirmation (bug seen on Windows terminals).
+  const [password, confirmation] = await askHidden(['Senha (mínimo 8 caracteres): ', 'Confirme a senha: ']);
   if (password !== confirmation) throw new Error('As senhas não conferem.');
   return password;
 }
