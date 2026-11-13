@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      Controle de presença — Núcleo Marcus Jussier
+    </title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="pad" style="display:flex;flex:1;flex-direction:column">
+        <h1 style="font-size:19px">
+          ← &nbsp;Controle de presença
+        </h1>
+        <div class="field" style="margin-top:20px">
+          <label>
+            Selecione a atividade *
+          </label>
+          <select>
+            <option>
+              Oficina de Violão
+            </option>
+            <option>
+              Oficina de Fotografia
+            </option>
+            <option>
+              Teatro para Jovens
+            </option>
+          </select>
+        </div>
+        <input class="search" style="margin-top:14px" type="search" placeholder="Buscar participante...">
+        <p class="muted small" style="margin-top:16px">
+          Marque quem compareceu à atividade.
+        </p>
+        <div class="rows">
+          <label>
+            <a>
+              <input type="checkbox" checked>
+              &nbsp;Ana Oliveira
+              <span class="status" style="float:right">
+                Presente
+              </span>
+            </a>
+          </label>
+          <label>
+            <a>
+              <input type="checkbox" checked>
+              &nbsp;João Silva
+              <span class="status" style="float:right">
+                Presente
+              </span>
+            </a>
+          </label>
+          <label>
+            <a>
+              <input type="checkbox">
+              &nbsp;Maria Souza
+              <span class="status off" style="float:right">
+                Ausente
+              </span>
+            </a>
+          </label>
+          <label>
+            <a>
+              <input type="checkbox" checked>
+              &nbsp;Carlos Lima
+              <span class="status" style="float:right">
+                Presente
+              </span>
+            </a>
+          </label>
+          <label>
+            <a>
+              <input type="checkbox">
+              &nbsp;Juliana Alves
+              <span class="status off" style="float:right">
+                Ausente
+              </span>
+            </a>
+          </label>
+        </div>
+        <button class="button" style="margin-top:auto">
+          Salvar presenças
+        </button>
+      </section>
+      <nav class="nav">
+        <a href="admin-painel.html">
+          Início
+        </a>
+        <a href="admin-atividades.html">
+          Atividades
+        </a>
+        <a href="admin-inscricoes.html">
+          Inscrições
+        </a>
+        <a href="admin-relatorios.html">
+          •••
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>

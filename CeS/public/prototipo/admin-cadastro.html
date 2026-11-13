@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      Nova atividade — Núcleo Marcus Jussier
+    </title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="pad">
+        <a class="back" href="admin-atividades.html">
+          ← Voltar
+        </a>
+        <h1 style="font-size:19px;margin-top:8px">
+          Nova atividade
+        </h1>
+        <form class="fields" action="admin-atividades.html">
+          <div class="field">
+            <label>
+              Nome da atividade *
+            </label>
+            <input required placeholder="Ex.: Oficina de Violão">
+          </div>
+          <div class="field">
+            <label>
+              Descrição *
+            </label>
+            <textarea required placeholder="Descreva a atividade, objetivos e conteúdo...">
+            </textarea>
+          </div>
+          <div class="field">
+            <label>
+              Categoria *
+            </label>
+            <select required>
+              <option value="">
+                Selecione a categoria
+              </option>
+              <option>
+                Música
+              </option>
+              <option>
+                Artes visuais
+              </option>
+              <option>
+                Teatro
+              </option>
+              <option>
+                Evento
+              </option>
+            </select>
+          </div>
+          <div class="field">
+            <label>
+              Instrutor responsável *
+            </label>
+            <select required>
+              <option value="">
+                Selecione o instrutor
+              </option>
+              <option>
+                Carlos Silva
+              </option>
+              <option>
+                Ana Paula
+              </option>
+              <option>
+                Marcos Lima
+              </option>
+            </select>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="field">
+              <label>
+                Data de início *
+              </label>
+              <input required placeholder="DD/MM/AAAA">
+            </div>
+            <div class="field">
+              <label>
+                Horário *
+              </label>
+              <input required placeholder="Ex.: 14h às 16h">
+            </div>
+          </div>
+          <div class="field">
+            <label>
+              Local *
+            </label>
+            <input required placeholder="Núcleo Marcus Jussier">
+          </div>
+          <div class="field">
+            <label>
+              Quantidade de vagas *
+            </label>
+            <input type="number" min="0" required placeholder="Ex.: 20">
+          </div>
+          <button class="button">
+            Salvar atividade
+          </button>
+        </form>
+      </section>
+      <nav class="nav">
+        <a href="admin-painel.html">
+          Início
+        </a>
+        <a class="active" href="admin-atividades.html">
+          Atividades
+        </a>
+        <a href="admin-inscricoes.html">
+          Inscrições
+        </a>
+        <a href="admin-relatorios.html">
+          •••
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>

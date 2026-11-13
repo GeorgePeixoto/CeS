@@ -1,0 +1,435 @@
+:root {
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:#17352f;
+  background:#e9efeb;
+  font-synthesis:none;
+  --muted:#647a73;
+  --line:#e1e9e4;
+  --green:#086653;
+  --soft:#dff4e8;
+  --yellow:#f7b52e;
+  --border:#d8e3dc
+}
+
+* {
+  box-sizing:border-box
+}
+
+body {
+  margin:0;
+  padding:24px 12px;
+  background:#e9efeb
+}
+
+.app {
+  width:min(100%,430px);
+  min-height:calc(100dvh - 48px);
+  margin:auto;
+  background:#fff;
+  box-shadow:0 2px 14px #17352f12;
+  display:flex;
+  flex-direction:column
+}
+
+.pad {
+  padding:18px
+}
+
+.logo {
+  display:flex;
+  align-items:center;
+  gap:9px
+}
+
+.mark {
+  display:flex;
+  gap:2px
+}
+
+.mark i {
+  display:block;
+  width:10px;
+  height:26px;
+  background:#08735c
+}
+
+.mark i:nth-child(2) {
+  background:#f39b35
+}
+
+.mark i:nth-child(3) {
+  background:#247d68
+}
+
+.logo small {
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  line-height:10px
+}
+
+.logo strong {
+  display:block;
+  font-size:15px
+}
+
+.nav {
+  position:sticky;
+  bottom:0;
+  margin-top:auto;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  min-height:72px;
+  border-top:1.5px solid #e5ece7;
+  background:white
+}
+
+.nav a {
+  padding:12px;
+  color:#55736a;
+  font-size:11px;
+  text-decoration:none
+}
+
+.nav a.active {
+  font-weight:700;
+  color:#08724f
+}
+
+h1 {
+  font-size:25px;
+  line-height:1.2;
+  margin:0
+}
+
+h2 {
+  font-size:17px;
+  margin:0
+}
+
+p {
+  margin:0
+}
+
+.muted {
+  color:var(--muted)
+}
+
+.small {
+  font-size:12px
+}
+
+.hero {
+  height:286px;
+  padding:24px 22px;
+  color:#fff;
+  background:linear-gradient(115deg,#073d35 0%,#15836a 62%,#ef9c35 62%,#e65e32);
+  display:flex;
+  flex-direction:column;
+  justify-content:center
+}
+
+.hero h1 {
+  font-size:25px
+}
+
+.hero p {
+  margin-top:14px;
+  font-size:12px;
+  line-height:1.5
+}
+
+.pillbtn,.button {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:10px 16px;
+  border:0;
+  border-radius:10px;
+  background:var(--green);
+  color:#fff;
+  text-decoration:none;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer
+}
+
+.pillbtn {
+  align-self:flex-start;
+  margin-top:22px;
+  background:var(--yellow);
+  border-radius:24px;
+  color:#17352f;
+  min-height:38px
+}
+
+.card {
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  overflow:hidden
+}
+
+.card-body {
+  padding:12px
+}
+
+.art {
+  height:100px;
+  background:linear-gradient(135deg,#ef9c35,#08755e 50%,#e65e32);
+  position:relative;
+  overflow:hidden
+}
+
+.art:after {
+  content:"";
+  position:absolute;
+  left:-5%;
+  right:-5%;
+  bottom:-36px;
+  height:75px;
+  background:#092f2b55;
+  border-radius:50% 50% 0 0
+}
+
+.tag {
+  display:inline-flex;
+  padding:4px 10px;
+  border-radius:99px;
+  background:var(--soft);
+  color:#08724f;
+  font-size:10px;
+  font-weight:700
+}
+
+.tag.orange {
+  background:#fff0dc;
+  color:#a95e0c
+}
+
+.tag.blue {
+  background:#e3efff;
+  color:#245c9a
+}
+
+.tag.purple {
+  background:#f1e6ff;
+  color:#7042a0
+}
+
+.section-title {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px
+}
+
+.section-title a,.back {
+  color:var(--muted);
+  font-size:12px;
+  text-decoration:none
+}
+
+.list {
+  list-style:none;
+  margin:14px 0 0;
+  padding:0;
+  display:grid;
+  gap:12px
+}
+
+.item {
+  display:flex;
+  gap:12px;
+  padding:12px;
+  position:relative;
+  color:inherit;
+  text-decoration:none
+}
+
+.thumb {
+  width:94px;
+  height:94px;
+  flex:none;
+  border-radius:9px;
+  background:linear-gradient(135deg,#ef9c35,#08755e 50%,#e65e32)
+}
+
+.thumb.photo {
+  background:radial-gradient(circle at center,#ef9c35 0 13%,#243e39 14% 30%,#b7c6b6 31%)
+}
+
+.thumb.orange {
+  background:#f39b35
+}
+
+.item h2 {
+  font-size:14px;
+  margin:8px 0 6px
+}
+
+.item p,.details p {
+  font-size:11px;
+  color:var(--muted);
+  margin-top:5px
+}
+
+.fields {
+  display:grid;
+  gap:14px;
+  margin-top:22px
+}
+
+.field label {
+  display:block;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:6px
+}
+
+.field input,.field textarea,.field select,.search {
+  width:100%;
+  border:1.5px solid var(--border);
+  border-radius:9px;
+  background:#fff;
+  min-height:46px;
+  padding:11px 12px;
+  color:#17352f;
+  font-family:inherit;
+  font-size:13px
+}
+
+.field textarea {
+  height:74px
+}
+
+.filters {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px
+}
+
+.filters span {
+  border-radius:99px;
+  background:#edf2ef;
+  padding:7px 11px;
+  font-size:11px;
+  color:var(--muted)
+}
+
+.filters span:first-child {
+  background:var(--green);
+  color:#fff
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:16px
+}
+
+.stat {
+  padding:12px;
+  border:1.5px solid var(--line);
+  border-radius:12px
+}
+
+.stat b {
+  display:block;
+  font-size:25px;
+  margin:6px 0
+}
+
+.stat small {
+  color:var(--muted)
+}
+
+.rows {
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden
+}
+
+.rows a {
+  display:block;
+  padding:12px;
+  border-bottom:1px solid var(--line);
+  color:inherit;
+  text-decoration:none;
+  font-size:13px
+}
+
+.rows a:last-child {
+  border:0
+}
+
+.spacer {
+  height:24px
+}
+
+.center {
+  text-align:center
+}
+
+.success {
+  margin:62px auto 18px;
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#13865d;
+  color:#fff;
+  font-size:38px
+}
+
+.footer-note {
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  margin:20px
+}
+
+.status {
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:99px;
+  background:#dff4e8;
+  color:#08724f;
+  font-size:11px;
+  font-weight:700
+}
+
+.status.pending {
+  background:#fff0dc;
+  color:#a95e0c
+}
+
+.status.off {
+  background:#edf2f3;
+  color:var(--muted)
+}
+
+@media(max-width:500px) {
+  body {
+  padding:0
+}
+
+.app {
+  min-height:100dvh
+}
+
+.hero {
+  background:linear-gradient(115deg,#073d35 0%,#15836a 68%,#ef9c35 68%,#e65e32)
+}
+
+
+}
+
+

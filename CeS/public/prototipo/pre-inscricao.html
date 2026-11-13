@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      Pré-inscrição — Núcleo Marcus Jussier
+    </title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="pad" style="flex:1">
+        <a class="back" href="detalhes.html">
+          ← Voltar
+        </a>
+        <h1 style="font-size:19px;margin-top:26px">
+          Pré-inscrição
+        </h1>
+        <p class="muted small" style="line-height:1.6;margin-top:12px">
+          Preencha os dados para demonstrar
+          <br>
+          interesse nesta atividade.
+        </p>
+        <form class="fields" action="confirmacao.html">
+          <div class="field">
+            <label>
+              Nome completo *
+            </label>
+            <input required autocomplete="name" placeholder="Digite seu nome completo">
+          </div>
+          <div class="field">
+            <label>
+              E-mail *
+            </label>
+            <input type="email" required autocomplete="email" placeholder="exemplo@dominio.com">
+          </div>
+          <div class="field">
+            <label>
+              Telefone (opcional)
+            </label>
+            <input type="tel" autocomplete="tel" placeholder="(88) 9 9999-9999">
+          </div>
+          <div class="field">
+            <label>
+              Atividade escolhida
+            </label>
+            <input readonly value="Oficina de Violão">
+          </div>
+          <button class="button" style="margin-top:18px">
+            Confirmar pré-inscrição
+          </button>
+        </form>
+        <p class="muted center" style="font-size:11px;margin-top:18px">
+          Ao continuar, seus dados serão usados
+          <br>
+          para processar esta solicitação.
+        </p>
+      </section>
+      <nav class="nav">
+        <a href="inicio.html">
+          Início
+        </a>
+        <a class="active" href="atividades.html">
+          Atividades
+        </a>
+        <a href="sobre.html">
+          Sobre
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>
