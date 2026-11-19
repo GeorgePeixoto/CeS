@@ -1,33 +1,75 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Programação — Núcleo Marcus Jussier</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="/">Núcleo Marcus Jussier<small>Arte, Educação e Cultura · Juazeiro do Norte</small></a>
-      <nav class="site-nav" aria-label="Principal">
+      <a class="brand" href="/">
+        Núcleo Marcus Jussier
+        <small>Cultura, Arte e Formação</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
         <a href="/" aria-current="page">Programação</a>
         <a href="/consulta.html">Consultar inscrição</a>
+        <a href="/admin/login.html">Área da equipe</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <h1>Programação</h1>
-    <p class="muted">Oficinas, cursos e eventos abertos à comunidade.</p>
-    <div id="alert" class="alert" role="alert"></div>
-    <div id="activities" class="grid" aria-live="polite">
-      <p class="empty-state">Em breve, a programação aparecerá aqui.</p>
-    </div>
+    <h1>Programação de Atividades</h1>
+    <p class="muted">Explore oficinas, cursos e eventos abertos para pré-inscrição.</p>
+
+    <div id="catalog-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <form id="filter-form" class="toolbar" aria-label="Filtrar atividades">
+      <div class="field">
+        <label for="filter-q">Buscar</label>
+        <input
+          id="filter-q"
+          name="q"
+          type="search"
+          placeholder="Ex.: violão, teatro, dança..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="field">
+        <label for="filter-category">Categoria</label>
+        <select id="filter-category" name="category">
+          <option value="">Todas as categorias</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filter-type">Tipo</label>
+        <select id="filter-type" name="type">
+          <option value="">Todos os tipos</option>
+          <option value="workshop">Oficina</option>
+          <option value="course">Curso</option>
+          <option value="event">Evento</option>
+        </select>
+      </div>
+
+      <div>
+        <button id="clear-filters" class="btn btn-secondary" type="button">Limpar</button>
+      </div>
+    </form>
+
+    <p id="results-count" class="muted" aria-live="polite"></p>
+    <div id="activities-grid" class="grid"></div>
+    <div id="empty-state" class="panel empty-state hidden">Nenhuma atividade encontrada</div>
   </main>
 
   <footer class="site-footer">
-    <div class="container">Núcleo de Arte, Educação e Cultura Marcus Jussier · Juazeiro do Norte – CE</div>
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
   </footer>
+
+  <script type="module" src="/js/catalog.js"></script>
 </body>
 </html>

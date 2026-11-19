@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalhe da Atividade — Núcleo Marcus Jussier</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">
+        Núcleo Marcus Jussier
+        <small>Cultura, Arte e Formação</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="/">Programação</a>
+        <a href="/consulta.html">Consultar inscrição</a>
+        <a href="/admin/login.html">Área da equipe</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p><a href="/">&larr; Voltar para a programação</a></p>
+
+    <div id="activity-alert" class="alert" role="alert" aria-live="polite"></div>
+    <article id="activity-detail" class="panel hidden"></article>
+
+    <section id="enroll-section" class="panel hidden" aria-labelledby="enroll-heading">
+      <h2 id="enroll-heading" style="margin-top: 0;">Pré-inscrição</h2>
+
+      <div id="enroll-soldout-alert" class="alert alert-info hidden">
+        As vagas para esta atividade estão esgotadas no momento.
+      </div>
+
+      <div id="enroll-alert" class="alert" role="alert" aria-live="polite"></div>
+
+      <form id="enroll-form" class="form" novalidate>
+        <fieldset id="enroll-fieldset" style="border: 0; padding: 0; margin: 0; display: grid; gap: 12px;">
+          <div class="field">
+            <label for="enroll-name">Nome completo do participante *</label>
+            <input id="enroll-name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="enroll-phone">Telefone / WhatsApp *</label>
+              <input
+                id="enroll-phone"
+                name="phone"
+                type="tel"
+                placeholder="(88) 99999-1234"
+                autocomplete="tel"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="enroll-birth-date">Data de nascimento *</label>
+              <input id="enroll-birth-date" name="birthDate" type="date" autocomplete="bday" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="enroll-email">E-mail (opcional)</label>
+            <input
+              id="enroll-email"
+              name="email"
+              type="email"
+              placeholder="voce@exemplo.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <div id="guardian-fields" class="panel hidden" style="margin: 4px 0; background: var(--color-bg);">
+            <h3 style="margin-top: 0;">Dados do responsável legal</h3>
+            <p class="muted" style="margin-top: 0; font-size: 0.9rem;">
+              Como o participante tem menos de 18 anos, informe os dados do responsável.
+            </p>
+            <div class="form-row cols-2">
+              <div class="field">
+                <label for="enroll-guardian-name">Nome do responsável *</label>
+                <input id="enroll-guardian-name" name="guardianName" type="text" />
+              </div>
+
+              <div class="field">
+                <label for="enroll-guardian-phone">Telefone do responsável *</label>
+                <input
+                  id="enroll-guardian-phone"
+                  name="guardianPhone"
+                  type="tel"
+                  placeholder="(88) 99999-1234"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin: 4px 0; background: var(--color-bg);">
+            <p class="hint" style="margin: 0 0 8px;">
+              <strong>Aviso de privacidade (LGPD):</strong> Coletamos apenas os dados necessários para organizar
+              as turmas, confirmar vagas e entrar em contato sobre esta atividade do Núcleo Marcus Jussier.
+            </p>
+            <div class="field">
+              <label class="checkbox">
+                <input id="enroll-consent" name="consent" type="checkbox" required />
+                <span id="enroll-consent-label">
+                  Concordo com o uso dos meus dados para organização das atividades do Núcleo Marcus Jussier.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <button id="enroll-submit" class="btn" type="submit">Confirmar pré-inscrição</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div id="enroll-success" class="hidden" aria-live="polite">
+        <div class="alert alert-success">
+          Pré-inscrição realizada com sucesso! Guarde seu número de protocolo para acompanhar sua vaga.
+        </div>
+        <div class="panel" style="background: var(--color-bg); text-align: center;">
+          <div class="muted" style="font-size: 0.9rem;">Seu protocolo</div>
+          <div
+            id="enroll-protocol-code"
+            style="font-size: 1.75rem; font-weight: 700; letter-spacing: 0.06em; margin: 4px 0;"
+          ></div>
+          <div class="muted" style="font-size: 0.9rem;">
+            Situação: <strong>Pendente de confirmação pela equipe</strong>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <a id="enroll-lookup-link" class="btn" href="/consulta.html">Consultar minha inscrição</a>
+          <a class="btn btn-secondary" href="/">Voltar para a programação</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/activity.js"></script>
+  <script type="module" src="/js/enroll.js"></script>
+</body>
+</html>

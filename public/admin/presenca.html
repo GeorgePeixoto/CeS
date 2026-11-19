@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chamada e Presença — Painel Administrativo</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html">Início</a>
+        <a href="/admin/atividades.html">Atividades</a>
+        <a href="/admin/instrutores.html">Instrutores</a>
+        <a href="/admin/inscricoes.html">Inscrições</a>
+        <a href="/admin/participantes.html">Participantes</a>
+        <a href="/admin/presenca.html" aria-current="page">Presença</a>
+        <a href="/admin/relatorios.html">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Chamada e Presença</h1>
+    <p class="muted">Selecione a atividade e a data do encontro para registrar a frequência dos inscritos confirmados.</p>
+
+    <div id="attendance-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <section class="panel" aria-label="Seleção de encontro">
+      <div class="form-row cols-2">
+        <div class="field">
+          <label for="attendance-activity">Atividade</label>
+          <select id="attendance-activity">
+            <option value="">Selecione uma atividade</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="attendance-date">Data do encontro</label>
+          <select id="attendance-date" disabled>
+            <option value="">Selecione uma atividade primeiro</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <div id="pending-warning" class="alert alert-info hidden" role="status"></div>
+
+    <section id="roster-panel" class="panel hidden" aria-labelledby="roster-title">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+        <div>
+          <h2 id="roster-title" style="margin: 0;">Lista de presença</h2>
+          <p id="roster-summary" class="muted" style="margin: 4px 0 0;"></p>
+        </div>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button id="check-all-btn" class="btn btn-secondary btn-small" type="button">Marcar todos</button>
+          <button id="uncheck-all-btn" class="btn btn-secondary btn-small" type="button">Desmarcar todos</button>
+        </div>
+      </div>
+
+      <form id="attendance-form" class="form">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 72px;">Presente</th>
+                <th>Participante</th>
+                <th>Protocolo</th>
+                <th>Telefone</th>
+              </tr>
+            </thead>
+            <tbody id="attendance-tbody"></tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <button id="save-attendance-btn" class="btn" type="submit">Salvar chamada</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="attendance-empty" class="panel empty-state hidden"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module" src="/js/admin-attendance.js"></script>
+</body>
+</html>

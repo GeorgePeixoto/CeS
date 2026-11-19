@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscrições — Painel Administrativo</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html">Início</a>
+        <a href="/admin/atividades.html">Atividades</a>
+        <a href="/admin/instrutores.html">Instrutores</a>
+        <a href="/admin/inscricoes.html" aria-current="page">Inscrições</a>
+        <a href="/admin/participantes.html">Participantes</a>
+        <a href="/admin/presenca.html">Presença</a>
+        <a href="/admin/relatorios.html">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Inscrições</h1>
+    <p class="muted">Acompanhe pré-inscrições, confirme vagas, cancele desistências ou registre inscrições presenciais.</p>
+
+    <div id="enrollments-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <details class="panel" id="walkin-panel">
+      <summary style="cursor: pointer; font-weight: 700;">+ Registrar inscrição presencial (já confirmada)</summary>
+
+      <form id="walkin-form" class="form" style="margin-top: 16px;" novalidate>
+        <div class="field">
+          <label for="walkin-activity">Atividade publicada *</label>
+          <select id="walkin-activity" name="activityId" required>
+            <option value="">Selecione uma atividade</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="walkin-name">Nome completo do participante *</label>
+          <input id="walkin-name" name="name" type="text" required />
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="walkin-phone">Telefone / WhatsApp *</label>
+            <input id="walkin-phone" name="phone" type="tel" placeholder="(88) 99999-1234" required />
+          </div>
+
+          <div class="field">
+            <label for="walkin-birth-date">Data de nascimento *</label>
+            <input id="walkin-birth-date" name="birthDate" type="date" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="walkin-email">E-mail (opcional)</label>
+          <input id="walkin-email" name="email" type="email" placeholder="participante@exemplo.com" />
+        </div>
+
+        <div id="walkin-guardian-fields" class="panel hidden" style="margin: 4px 0; background: var(--color-bg);">
+          <h3 style="margin-top: 0;">Dados do responsável legal</h3>
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="walkin-guardian-name">Nome do responsável *</label>
+              <input id="walkin-guardian-name" name="guardianName" type="text" />
+            </div>
+
+            <div class="field">
+              <label for="walkin-guardian-phone">Telefone do responsável *</label>
+              <input id="walkin-guardian-phone" name="guardianPhone" type="tel" placeholder="(88) 99999-1234" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button id="walkin-submit" class="btn" type="submit">Confirmar inscrição presencial</button>
+        </div>
+      </form>
+    </details>
+
+    <form id="enrollments-filter-form" class="toolbar" aria-label="Filtrar inscrições">
+      <div class="field">
+        <label for="filter-activity">Atividade</label>
+        <select id="filter-activity" name="activity">
+          <option value="">Todas as atividades</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filter-status">Situação</label>
+        <select id="filter-status" name="status">
+          <option value="">Todas</option>
+          <option value="pending">Pendentes</option>
+          <option value="confirmed">Confirmadas</option>
+          <option value="cancelled">Canceladas</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filter-q">Buscar participante ou protocolo</label>
+        <input id="filter-q" name="q" type="search" placeholder="Nome, telefone ou NMJ-..." autocomplete="off" />
+      </div>
+
+      <div>
+        <button id="filter-clear" class="btn btn-secondary" type="button">Limpar</button>
+      </div>
+    </form>
+
+    <p id="enrollments-count" class="muted" aria-live="polite"></p>
+
+    <div id="enrollments-table-wrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Protocolo</th>
+            <th>Participante</th>
+            <th>Atividade</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="enrollments-tbody"></tbody>
+      </table>
+    </div>
+    <div id="enrollments-empty" class="panel empty-state hidden">Nenhuma inscrição encontrada.</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module" src="/js/admin-enrollments.js"></script>
+</body>
+</html>

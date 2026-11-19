@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel Administrativo — Núcleo Marcus Jussier</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html" aria-current="page">Início</a>
+        <a href="/admin/atividades.html">Atividades</a>
+        <a href="/admin/instrutores.html">Instrutores</a>
+        <a href="/admin/inscricoes.html">Inscrições</a>
+        <a href="/admin/participantes.html">Participantes</a>
+        <a href="/admin/presenca.html">Presença</a>
+        <a href="/admin/relatorios.html">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Visão Geral</h1>
+    <p class="muted">Acesso rápido à gestão de atividades, inscrições, presença e indicadores do Núcleo.</p>
+
+    <div id="dashboard-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <section
+      class="grid"
+      style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-bottom: 24px;"
+      aria-label="Resumo rápido"
+    >
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Atividades</span>
+        <strong id="kpi-activities" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Inscrições ativas</span>
+        <strong id="kpi-enrollments" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Participantes</span>
+        <strong id="kpi-participants" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Ocupação média</span>
+        <strong id="kpi-occupancy" style="font-size: 1.75rem;">—</strong>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Módulos administrativos">
+      <article class="card">
+        <h3>Atividades e Categorias</h3>
+        <p class="muted">Cadastre oficinas, cursos e eventos, defina horários semanais e publique no catálogo.</p>
+        <div class="actions">
+          <a class="btn" href="/admin/atividades.html">Gerenciar atividades</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Instrutores</h3>
+        <p class="muted">Gerencie os arte-educadores e ative ou desative perfis disponíveis para turmas.</p>
+        <div class="actions">
+          <a class="btn btn-secondary" href="/admin/instrutores.html">Gerenciar instrutores</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Inscrições</h3>
+        <p class="muted">Confirme pré-inscrições pendentes, cancele desistências ou registre inscrições presenciais.</p>
+        <div class="actions">
+          <a class="btn" href="/admin/inscricoes.html">Gerenciar inscrições</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Participantes</h3>
+        <p class="muted">Consulte fichas cadastrais, contatos de responsáveis e histórico de participação.</p>
+        <div class="actions">
+          <a class="btn btn-secondary" href="/admin/participantes.html">Ver participantes</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Chamada e Presença</h3>
+        <p class="muted">Registre a frequência dos inscritos confirmados em cada encontro realizado.</p>
+        <div class="actions">
+          <a class="btn" href="/admin/presenca.html">Fazer chamada</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Relatórios</h3>
+        <p class="muted">Analise ocupação por atividade, taxa de frequência e gráficos comparativos.</p>
+        <div class="actions">
+          <a class="btn btn-secondary" href="/admin/relatorios.html">Abrir relatórios</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module">
+    import { api, showAlert } from '/js/api.js';
+
+    const alertEl = document.querySelector('#dashboard-alert');
+    try {
+      const summary = await api('/api/admin/reports/summary');
+      if (summary?.totals) {
+        document.querySelector('#kpi-activities').textContent = String(summary.totals.activities);
+        document.querySelector('#kpi-enrollments').textContent = String(summary.totals.enrollments);
+        document.querySelector('#kpi-participants').textContent = String(summary.totals.participants);
+        document.querySelector('#kpi-occupancy').textContent = `${summary.totals.avgOccupancy}%`;
+      }
+    } catch (err) {
+      showAlert(alertEl, err.message);
+    }
+  </script>
+</body>
+</html>

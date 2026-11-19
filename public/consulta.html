@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consultar Inscrição — Núcleo Marcus Jussier</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">
+        Núcleo Marcus Jussier
+        <small>Cultura, Arte e Formação</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="/">Programação</a>
+        <a href="/consulta.html" aria-current="page">Consultar inscrição</a>
+        <a href="/admin/login.html">Área da equipe</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Consultar Pré-inscrição</h1>
+    <p class="muted">Informe o protocolo recebido e o telefone cadastrado na inscrição.</p>
+
+    <div id="lookup-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <section class="panel" style="max-width: 560px;">
+      <form id="lookup-form" class="form" novalidate>
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="lookup-protocol">Protocolo *</label>
+            <input
+              id="lookup-protocol"
+              name="protocol"
+              type="text"
+              placeholder="Ex.: NMJ-7KQ4XP"
+              style="text-transform: uppercase;"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="lookup-phone">Telefone cadastrado *</label>
+            <input
+              id="lookup-phone"
+              name="phone"
+              type="tel"
+              placeholder="(88) 99999-1234"
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <button id="lookup-submit" class="btn" type="submit">Consultar</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="lookup-result" class="panel hidden" style="max-width: 560px;" aria-live="polite"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/lookup.js"></script>
+</body>
+</html>

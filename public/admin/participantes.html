@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Participantes — Painel Administrativo</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html">Início</a>
+        <a href="/admin/atividades.html">Atividades</a>
+        <a href="/admin/instrutores.html">Instrutores</a>
+        <a href="/admin/inscricoes.html">Inscrições</a>
+        <a href="/admin/participantes.html" aria-current="page">Participantes</a>
+        <a href="/admin/presenca.html">Presença</a>
+        <a href="/admin/relatorios.html">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Participantes</h1>
+    <p class="muted">Consulte os dados cadastrais e o histórico de participação nas atividades.</p>
+
+    <div id="participants-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <section id="participant-detail-panel" class="panel hidden" aria-labelledby="participant-detail-title">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <h2 id="participant-detail-title" style="margin: 0;">Ficha do participante</h2>
+        <button id="close-detail-btn" class="btn btn-secondary btn-small" type="button">Fechar ficha</button>
+      </div>
+
+      <form id="participant-edit-form" class="form" style="margin-top: 16px;" novalidate>
+        <input type="hidden" name="id" />
+
+        <div class="field">
+          <label for="part-name">Nome completo *</label>
+          <input id="part-name" name="name" type="text" required />
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="part-phone">Telefone / WhatsApp *</label>
+            <input id="part-phone" name="phone" type="tel" required />
+          </div>
+
+          <div class="field">
+            <label for="part-birth-date">Data de nascimento *</label>
+            <input id="part-birth-date" name="birthDate" type="date" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="part-email">E-mail</label>
+          <input id="part-email" name="email" type="email" />
+        </div>
+
+        <div id="part-guardian-fields" class="panel hidden" style="margin: 4px 0; background: var(--color-bg);">
+          <h3 style="margin-top: 0;">Dados do responsável legal</h3>
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="part-guardian-name">Nome do responsável *</label>
+              <input id="part-guardian-name" name="guardianName" type="text" />
+            </div>
+
+            <div class="field">
+              <label for="part-guardian-phone">Telefone do responsável *</label>
+              <input id="part-guardian-phone" name="guardianPhone" type="tel" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button id="part-save-btn" class="btn" type="submit">Salvar alterações</button>
+        </div>
+      </form>
+
+      <h3>Histórico de inscrições</h3>
+      <div id="participant-history"></div>
+    </section>
+
+    <form id="participants-search-form" class="toolbar" aria-label="Buscar participantes">
+      <div class="field">
+        <label for="search-q">Buscar por nome ou telefone</label>
+        <input id="search-q" name="q" type="search" placeholder="Ex.: Maria ou (88) 99999..." autocomplete="off" />
+      </div>
+      <div>
+        <button id="search-clear" class="btn btn-secondary" type="button">Limpar</button>
+      </div>
+    </form>
+
+    <div id="participants-table-wrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Contato</th>
+            <th>Responsável</th>
+            <th class="num">Inscrições</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="participants-tbody"></tbody>
+      </table>
+    </div>
+    <div id="participants-empty" class="panel empty-state hidden">Nenhum participante encontrado.</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module" src="/js/admin-participants.js"></script>
+</body>
+</html>

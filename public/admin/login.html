@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acesso Administrativo — Núcleo Marcus Jussier</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">
+        Núcleo Marcus Jussier
+        <small>Área Administrativa</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="/">Catálogo público</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel" style="max-width: 440px; margin: 24px auto;">
+      <h1>Entrar no painel</h1>
+      <p class="muted">Informe seu e-mail e senha de administrador para continuar.</p>
+
+      <div id="login-alert" class="alert" role="alert" aria-live="polite"></div>
+
+      <form id="login-form" class="form" novalidate>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Senha</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <div>
+          <button class="btn" type="submit">Entrar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/login.js"></script>
+</body>
+</html>

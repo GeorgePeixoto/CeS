@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atividades — Painel Administrativo</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html">Início</a>
+        <a href="/admin/atividades.html" aria-current="page">Atividades</a>
+        <a href="/admin/instrutores.html">Instrutores</a>
+        <a href="/admin/inscricoes.html">Inscrições</a>
+        <a href="/admin/participantes.html">Participantes</a>
+        <a href="/admin/presenca.html">Presença</a>
+        <a href="/admin/relatorios.html">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Atividades</h1>
+    <p class="muted">Gerencie oficinas, cursos, eventos e categorias do catálogo.</p>
+
+    <div id="activities-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <section class="panel" aria-labelledby="activity-form-title">
+      <h2 id="activity-form-title" style="margin-top: 0;">Nova atividade</h2>
+
+      <form id="activity-form" class="form" novalidate>
+        <input type="hidden" name="id" />
+
+        <div class="field">
+          <label for="activity-title">Título *</label>
+          <input id="activity-title" name="title" type="text" required />
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="activity-type">Tipo *</label>
+            <select id="activity-type" name="type" required>
+              <option value="workshop">Oficina</option>
+              <option value="course">Curso</option>
+              <option value="event">Evento</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="activity-category">Categoria *</label>
+            <select id="activity-category" name="categoryId" required>
+              <option value="">Selecione uma categoria</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="activity-instructor">Instrutor(a)</label>
+            <select id="activity-instructor" name="instructorId">
+              <option value="">Sem instrutor definido</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="activity-location">Local</label>
+            <input id="activity-location" name="location" type="text" placeholder="Ex.: Sala 01, Auditório..." />
+          </div>
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="activity-start-date">Data de início *</label>
+            <input id="activity-start-date" name="startDate" type="date" required />
+          </div>
+
+          <div class="field">
+            <label for="activity-end-date">Data de término *</label>
+            <input id="activity-end-date" name="endDate" type="date" required />
+            <span class="hint">Para eventos de um único dia, repita a data de início.</span>
+          </div>
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="activity-capacity">Vagas (capacidade) *</label>
+            <input id="activity-capacity" name="capacity" type="number" min="1" max="500" required />
+          </div>
+
+          <div class="field">
+            <label for="activity-min-age">Idade mínima (opcional)</label>
+            <input id="activity-min-age" name="minAge" type="number" min="0" max="120" placeholder="Livre" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="activity-description">Descrição</label>
+          <textarea id="activity-description" name="description" rows="3"></textarea>
+        </div>
+
+        <div class="field">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+            <label style="margin: 0;">Horários semanais *</label>
+            <button id="add-schedule-btn" class="btn btn-secondary btn-small" type="button">
+              + Adicionar horário
+            </button>
+          </div>
+          <input type="hidden" name="schedules" />
+          <div id="schedules-list" style="display: grid; gap: 8px; margin-top: 8px;"></div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+          <button id="activity-submit" class="btn" type="submit">Salvar rascunho</button>
+          <button id="activity-cancel-edit" class="btn btn-secondary hidden" type="button">
+            Cancelar edição
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <h2>Atividades cadastradas</h2>
+    <div id="activities-table-wrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Atividade</th>
+            <th>Período e horários</th>
+            <th>Vagas</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="activities-tbody"></tbody>
+      </table>
+    </div>
+    <div id="activities-empty" class="panel empty-state hidden">Nenhuma atividade cadastrada.</div>
+
+    <section class="panel" style="margin-top: 32px;" aria-labelledby="categories-title">
+      <h2 id="categories-title" style="margin-top: 0;">Categorias</h2>
+      <p class="muted">Adicione ou renomeie categorias disponíveis para as atividades.</p>
+
+      <div id="categories-alert" class="alert" role="alert" aria-live="polite"></div>
+
+      <form id="category-form" class="toolbar" novalidate>
+        <input type="hidden" name="id" />
+        <div class="field">
+          <label for="category-name">Nome da categoria *</label>
+          <input id="category-name" name="name" type="text" placeholder="Ex.: Música, Teatro, Dança..." required />
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button id="category-submit" class="btn" type="submit">Adicionar</button>
+          <button id="category-cancel-edit" class="btn btn-secondary hidden" type="button">Cancelar</button>
+        </div>
+      </form>
+
+      <div id="categories-list" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module" src="/js/admin-activities.js"></script>
+</body>
+</html>

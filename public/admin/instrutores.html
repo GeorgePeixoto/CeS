@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instrutores — Painel Administrativo</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html">Início</a>
+        <a href="/admin/atividades.html">Atividades</a>
+        <a href="/admin/instrutores.html" aria-current="page">Instrutores</a>
+        <a href="/admin/inscricoes.html">Inscrições</a>
+        <a href="/admin/participantes.html">Participantes</a>
+        <a href="/admin/presenca.html">Presença</a>
+        <a href="/admin/relatorios.html">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Instrutores</h1>
+    <p class="muted">Cadastre os arte-educadores e controle quem está ativo para novas atividades.</p>
+
+    <div id="instructors-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <section class="panel" aria-labelledby="instructor-form-title">
+      <h2 id="instructor-form-title" style="margin-top: 0;">Novo instrutor</h2>
+
+      <form id="instructor-form" class="form" novalidate>
+        <input type="hidden" name="id" />
+
+        <div class="field">
+          <label for="instructor-name">Nome completo *</label>
+          <input id="instructor-name" name="name" type="text" required />
+        </div>
+
+        <div class="form-row cols-2">
+          <div class="field">
+            <label for="instructor-phone">Telefone (WhatsApp)</label>
+            <input id="instructor-phone" name="phone" type="tel" placeholder="(88) 99999-1234" />
+          </div>
+
+          <div class="field">
+            <label for="instructor-email">E-mail</label>
+            <input id="instructor-email" name="email" type="email" placeholder="instrutor@exemplo.com" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="instructor-bio">Minibiografia (exibida ao público)</label>
+          <textarea id="instructor-bio" name="bio" rows="3"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input id="instructor-active" name="active" type="checkbox" checked />
+            <span>Instrutor ativo (disponível para novas atividades)</span>
+          </label>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button id="instructor-submit" class="btn" type="submit">Salvar instrutor</button>
+          <button id="instructor-cancel-edit" class="btn btn-secondary hidden" type="button">
+            Cancelar edição
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <h2>Instrutores cadastrados</h2>
+    <div id="instructors-table-wrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Contato (interno)</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="instructors-tbody"></tbody>
+      </table>
+    </div>
+    <div id="instructors-empty" class="panel empty-state hidden">Nenhum instrutor cadastrado.</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module" src="/js/admin-instructors.js"></script>
+</body>
+</html>

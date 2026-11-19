@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relatórios — Painel Administrativo</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/admin/index.html">
+        Núcleo Marcus Jussier
+        <small>Painel Administrativo</small>
+      </a>
+      <nav class="site-nav" aria-label="Navegação administrativa">
+        <a href="/admin/index.html">Início</a>
+        <a href="/admin/atividades.html">Atividades</a>
+        <a href="/admin/instrutores.html">Instrutores</a>
+        <a href="/admin/inscricoes.html">Inscrições</a>
+        <a href="/admin/participantes.html">Participantes</a>
+        <a href="/admin/presenca.html">Presença</a>
+        <a href="/admin/relatorios.html" aria-current="page">Relatórios</a>
+        <a href="/">Catálogo</a>
+        <span data-admin-name aria-label="Usuário logado"></span>
+        <button type="button" class="link" data-admin-logout>Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Relatórios e Indicadores</h1>
+    <p class="muted">Acompanhe a ocupação das vagas e a taxa de frequência das atividades do Núcleo.</p>
+
+    <div id="reports-alert" class="alert" role="alert" aria-live="polite"></div>
+
+    <form id="reports-filter-form" class="toolbar" aria-label="Filtrar relatórios">
+      <div class="field">
+        <label for="filter-from">Início a partir de</label>
+        <input id="filter-from" name="from" type="date" />
+      </div>
+
+      <div class="field">
+        <label for="filter-to">Início até</label>
+        <input id="filter-to" name="to" type="date" />
+      </div>
+
+      <div class="field">
+        <label for="filter-category">Categoria</label>
+        <select id="filter-category" name="category">
+          <option value="">Todas as categorias</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="btn" type="submit">Filtrar</button>
+        <button id="filter-clear" class="btn btn-secondary" type="button">Limpar</button>
+      </div>
+    </form>
+
+    <section
+      id="totals-grid"
+      class="grid"
+      style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-bottom: 24px;"
+      aria-label="Totais gerais"
+    >
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Atividades</span>
+        <strong id="total-activities" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Inscrições ativas</span>
+        <strong id="total-enrollments" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Participantes únicos</span>
+        <strong id="total-participants" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Ocupação média</span>
+        <strong id="total-occupancy" style="font-size: 1.75rem;">—</strong>
+      </article>
+
+      <article class="card">
+        <span class="muted" style="font-size: 0.85rem;">Frequência média</span>
+        <strong id="total-attendance" style="font-size: 1.75rem;">—</strong>
+      </article>
+    </section>
+
+    <section
+      id="charts-section"
+      class="grid"
+      style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 24px;"
+      aria-label="Gráficos comparativos"
+    >
+      <article class="panel" style="margin: 0; min-width: 0;">
+        <h2 style="margin-top: 0; font-size: 1.1rem;">Inscritos × Vagas por atividade</h2>
+        <div style="position: relative; width: 100%; height: 280px;">
+          <canvas id="chart-occupancy"></canvas>
+        </div>
+      </article>
+
+      <article class="panel" style="margin: 0; min-width: 0;">
+        <h2 style="margin-top: 0; font-size: 1.1rem;">Frequência (%) por atividade</h2>
+        <div style="position: relative; width: 100%; height: 280px;">
+          <canvas id="chart-attendance"></canvas>
+        </div>
+      </article>
+    </section>
+
+    <h2>Detalhamento por atividade</h2>
+    <div id="reports-table-wrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <button type="button" class="link" data-sort="title">Atividade</button>
+            </th>
+            <th>
+              <button type="button" class="link" data-sort="category">Categoria</button>
+            </th>
+            <th class="num">
+              <button type="button" class="link" data-sort="capacity">Vagas</button>
+            </th>
+            <th class="num">
+              <button type="button" class="link" data-sort="enrolled">Inscritos</button>
+            </th>
+            <th class="num">
+              <button type="button" class="link" data-sort="confirmed">Confirmados</button>
+            </th>
+            <th class="num">
+              <button type="button" class="link" data-sort="occupancy">Ocupação</button>
+            </th>
+            <th class="num">
+              <button type="button" class="link" data-sort="attendanceRate">Frequência</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="reports-tbody"></tbody>
+      </table>
+    </div>
+    <div id="reports-empty" class="panel empty-state hidden">
+      Nenhuma atividade encontrada para os filtros selecionados.
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Núcleo Marcus Jussier — Gestão Cultural</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script type="module" src="/js/admin-guard.js"></script>
+  <script type="module" src="/js/admin-reports.js"></script>
+</body>
+</html>
